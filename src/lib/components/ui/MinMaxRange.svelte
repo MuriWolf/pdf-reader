@@ -23,7 +23,7 @@
     }
 </script>
 
-<div>
+<div class="w-full">
     <div class="flex justify-between mb-4">
         <p class="text-darker-text text-c-body-text">{title}</p>
         <div class="flex gap-x-2 bg-c-body-text border-[1px] rounded-md px-4 py-1 max-w-[33%] min-w-[150px]">

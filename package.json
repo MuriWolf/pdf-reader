@@ -33,7 +33,7 @@
   "type": "module",
   "dependencies": {
     "@internationalized/date": "^3.5.3",
-    "bits-ui": "^0.21.7",
+    "bits-ui": "^0.21.8",
     "clsx": "^2.1.1",
     "lucide-svelte": "^0.378.0",
     "tailwind-merge": "^2.3.0",

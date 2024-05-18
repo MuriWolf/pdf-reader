@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -76,3 +77,34 @@
     @apply bg-background text-foreground;
   }
 }
+
+body {
+  font-family: "Sora", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+/* SCROLL BAR */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 4px;
+  scrollbar-width: thin;
+  border-radius: 3px;
+  scrollbar-color: #d1d5db #f3f4f6;
+}
+
+@media (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f8fafc;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #00000040;
+}
+/* SCROLL BAR */

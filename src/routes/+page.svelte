@@ -18,7 +18,7 @@
             {/each}
         </div>
         <div class="flex gap-4 justify-end max-xs:flex-col-reverse">
-            <Button class="bg-transparent border-2 border-c-body-text">Cancelar</Button>
+            <Button class="bg-transparent border-2 border-c-body-text hover:bg-c-body-text hover:text-black transition-all ease-in">Cancelar</Button>
             <Button class="!px-16">Enviar</Button>
         </div>
     </section>
@@ -28,7 +28,7 @@
     ::-webkit-scrollbar {
         height: 12px;
         scrollbar-width: thin;
-        scrollbar-color: #d1d5db #f3f4f6;
-        }
+        scrollbar-color: #d1d5db00 #6d737f;
+    }
 
 </style>

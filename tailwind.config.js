@@ -15,6 +15,7 @@ const config = {
 		},
     boxShadow: {
       'sm': '4px 4px 8px rgba(0, 0, 0, 0.15)',
+	  'inner-sm': 'inset 4px 4px 8px rgba(0, 0, 0, 0.15)',
     },
 		extend: {
       screens: {

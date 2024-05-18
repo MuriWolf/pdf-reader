@@ -18,13 +18,13 @@
     <h1 class="max-w-3xl mx-auto text-c-body-text font-bold text-5xl ">Envios</h1>
     <section class="max-w-3xl mx-auto mt-4 bg-c-secondary rounded-2xl p-4">
         <h2 class="text-c-body-text font-bold text-2xl">Filtros</h2>
-        <form action="" class="flex flex-col items-start gap-4 mt-4">
+        <form action="" class="flex flex-col items-start gap-4 mt-4 w-full">
             <Label titulo={"Título do aquivo"} />
+            <MinMaxRange title={"Valor da multa"} />
             <div>
                 <span class="text-c-body-text mb-1 block">Data</span>
                 <RangeCalendar bind:value class="rounded-[5px] border bg-c-body-text" />
             </div>
-            <MinMaxRange title={"Valor da multa"} />
         </form>
     </section>
 

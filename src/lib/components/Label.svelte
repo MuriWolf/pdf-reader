@@ -2,6 +2,7 @@
     import { createLabel, melt } from '@melt-ui/svelte'
 
     export let titulo = "titulo"
+    export let type = "text"
     const {
         elements: { root }
     } = createLabel()
@@ -17,9 +18,9 @@
       <span class="text-c-body-text">{titulo}</span>
     </label>
     <input
-      type="text"
+      type={type}
       id="email"
-      class="h-10 w-[240px] rounded-[5px] bg-c-body-text px-3 py-2 focus:outline-none text-c-secondary-dark ring-c-body-text focus:ring-2 transition-all"
+      class="h-10 w-full rounded-[5px] bg-c-body-text px-3 py-2 focus:outline-none text-c-secondary-dark ring-c-body-text focus:ring-2 transition-all"
       placeholder="vanilla@melt-ui.com"
     />
   </div>

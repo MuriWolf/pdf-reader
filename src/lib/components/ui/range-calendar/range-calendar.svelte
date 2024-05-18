@@ -21,7 +21,7 @@
 	bind:placeholder
 	bind:startValue
 	{weekdayFormat}
-	class={cn("p-3", className)}
+	class={cn("p-1 xxs:p-3", className)}
 	{...$$restProps}
 	let:months
 	let:weekdays
