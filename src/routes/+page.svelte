@@ -2,19 +2,12 @@
 	import PdfInput from '$lib/components/inputs/PdfInput.svelte';
     import Button from "$lib/components/Button.svelte";
     import { scale, slide } from "svelte/transition"
-    import { PdfReader } from "pdfreader";
+    import { PdfViewer } from "svelte-pdf-simple";
+    import * as pdfjsLib from "pdfjs-dist";
 
     let numero: number = 10;
     let selectedFiles: Array<File> = [];
 
-    $: if (selectedFiles.length > 0) {
-        
-        new PdfReader(null).parseFileItems("test/sample.pdf", (err, item) => {
-            if (err) console.error("error:", err);
-            else if (!item) console.warn("end of file");
-            else if (item.text) console.log(item.text);
-        });
-    }
     
 
     function deleteFile(fileName: string) {

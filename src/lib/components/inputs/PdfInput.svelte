@@ -19,7 +19,7 @@
             for (let j = 0; j < selectedFiles.length; j++) {
                 const selectedFile = selectedFiles[j];
                 if (file.name == selectedFile.name) {
-                    
+
                     inputFiles = undefined;
                     imgInputErrorMessage = 'Arquivo já existe.';
                     break;
