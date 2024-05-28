@@ -3,7 +3,7 @@
     export let selectedFiles: Array<File> = [];
     let imgInputErrorMessage: string | undefined;
     let inputEl: any;
-
+    
     $: if (inputFiles && inputFiles.length > 0) {
 		imgInputErrorMessage = undefined;
         let fileSize: number;
@@ -15,11 +15,9 @@
                 inputFiles = undefined;
                 imgInputErrorMessage = 'Arquivo muito grande. Max: 20 MB';
 		    }
-            console.log();
             
             for (let j = 0; j < selectedFiles.length; j++) {
                 const selectedFile = selectedFiles[j];
-                console.log("ingual");
                 if (file.name == selectedFile.name) {
                     
                     inputFiles = undefined;
@@ -33,7 +31,6 @@
             }
         }
 
-
         if (imgInputErrorMessage == undefined) {
             for (let i = 0; i < inputFiles!.length; i++)  {
                 selectedFiles.push(inputFiles![i]);  
@@ -43,6 +40,8 @@
             selectedFiles = selectedFiles; 
             inputFiles = undefined;
         }
+
+        
 
     </script>
 
