@@ -2,8 +2,8 @@
 	import PdfInput from '$lib/components/inputs/PdfInput.svelte';
     import Button from "$lib/components/Button.svelte";
     import { scale, slide } from "svelte/transition"
-    import { PdfViewer } from "svelte-pdf-simple";
-    import * as pdfjsLib from "pdfjs-dist";
+    // import { PdfViewer } from "svelte-pdf-simple";
+    // import * as pdfjsLib from "pdfjs-dist";
 
     let numero: number = 10;
     let selectedFiles: Array<File> = [];
