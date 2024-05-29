@@ -4,9 +4,36 @@
     import { scale, slide } from "svelte/transition"
     // import { PdfViewer } from "svelte-pdf-simple";
     // import * as pdfjsLib from "pdfjs-dist";
+    import axios from 'axios';
 
     let numero: number = 10;
     let selectedFiles: Array<File> = [];
+
+    $: if (selectedFiles.length > 0) {
+        console.log(typeof(selectedFiles[0]));
+        
+        // let data = new FormData();
+        // data.append("file", fs.createReadStream("/path/to/file"));
+
+        // let config = {
+        // method: "post",
+        // maxBodyLength: Infinity,
+        // url: "https://api.pdfrest.com/extracted-text",
+        // headers: {
+        //     "Api-Key": "209efcae-ec73-461a-88f4-c69c97a5aead", 
+        //     ...data.getHeaders(), 
+        // },
+        // data: data, 
+        // };
+
+        // axios(config)
+        // .then(function (response) {
+        //     console.log(JSON.stringify(response.data));
+        // })
+        // .catch(function (error) {
+        //     console.log(error);
+        // });
+    }
 
     
 
