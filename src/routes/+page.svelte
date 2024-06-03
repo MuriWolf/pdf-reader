@@ -2,38 +2,22 @@
 	import PdfInput from '$lib/components/inputs/PdfInput.svelte';
     import Button from "$lib/components/Button.svelte";
     import { scale, slide } from "svelte/transition"
-    // import { PdfViewer } from "svelte-pdf-simple";
-    // import * as pdfjsLib from "pdfjs-dist";
-    import axios from 'axios';
-
-    let numero: number = 10;
+    import { base64 } from "@sveu/browser"
     let selectedFiles: Array<File> = [];
-
-    $: if (selectedFiles.length > 0) {
-        console.log(typeof(selectedFiles[0]));
+    // let encodedPDF
+    // $: if (selectedFiles.length > 0) {
+    //     encodedPDF = base64(selectedFiles[0])
+    //     console.log($encodedPDF);    
         
-        // let data = new FormData();
-        // data.append("file", fs.createReadStream("/path/to/file"));
+    // }
 
-        // let config = {
-        // method: "post",
-        // maxBodyLength: Infinity,
-        // url: "https://api.pdfrest.com/extracted-text",
-        // headers: {
-        //     "Api-Key": "209efcae-ec73-461a-88f4-c69c97a5aead", 
-        //     ...data.getHeaders(), 
-        // },
-        // data: data, 
-        // };
+    $: encodedPDF = base64(selectedFiles[0]);
 
-        // axios(config)
-        // .then(function (response) {
-        //     console.log(JSON.stringify(response.data));
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });
+    $: if ($encodedPDF) {
+        console.log("asdas");
+        
     }
+    
 
     
 
@@ -41,7 +25,6 @@
         selectedFiles = selectedFiles.filter((file) => file.name != fileName)
     }
 </script>
-
 <main class="mx-auto p-4">
     <h1 class="max-w-3xl mx-auto text-c-body-text font-bold text-5xl">Enviar</h1>
     <section class="max-w-3xl mx-auto mt-4 bg-c-secondary rounded-2xl p-4">

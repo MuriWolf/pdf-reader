@@ -28,7 +28,7 @@
             <AlertDialog.Trigger asChild let:builder>
               <Button builders={[builder]} variant="outline" class="bg-c-primary text-c-body-text hover:text-c-body-text hover:bg-c-primary border-none font-semibold rounded-[5px] hover:bg-c-primary/80 w-full transition-all ease-in shadow-sm hover:shadow-transparent">Ver mais</Button>
             </AlertDialog.Trigger>
-            <AlertDialog.Content class="p-0  rounded-2xl border-none overflow-auto">
+            <AlertDialog.Content class="p-0 rounded-2xl border-none overflow-auto">
               <AlertDialog.Header class="bg-c-primary p-4 rounded-2xl">
                 <AlertDialog.Title class="text-c-body-text text-3xl font-bold">Titulo do documento pdf</AlertDialog.Title>
                 <AlertDialog.Description>
