@@ -4,21 +4,20 @@
     import { scale, slide } from "svelte/transition"
     import { base64 } from "@sveu/browser"
     let selectedFiles: Array<File> = [];
-    // let encodedPDF
-    // $: if (selectedFiles.length > 0) {
-    //     encodedPDF = base64(selectedFiles[0])
-    //     console.log($encodedPDF);    
-        
-    // }
-
-    $: encodedPDF = base64(selectedFiles[0]);
-
-    $: if ($encodedPDF) {
-        console.log("asdas");
+    let encodedPDF: any;
+    $: if (selectedFiles.length > 0) {
+        encodedPDF = base64(selectedFiles[0])
+        console.log($encodedPDF);    
         
     }
-    
 
+    // $: encodedPDF = base64(selectedFiles[0]);
+
+    // $: if ($encodedPDF) {
+    //     $encodedPDF = $encodedPDF.replace("data:application/pdf;base64,", "")
+    //     console.log($encodedPDF);
+        
+    // }
     
 
     function deleteFile(fileName: string) {
@@ -49,7 +48,7 @@
             {/if}
         </div>
         <div class="flex gap-4 justify-end max-xs:flex-col-reverse">
-            <Button class="bg-transparent border-2 border-c-body-text hover:!bg-c-body-text hover:text-black transition-all ease-in" on:click={() => selectedFiles = []}>Cancelar</Button>
+            <Button class="bg-transparent border-2 border-c-body-text hover:!bg-c-body-text hover:text-black transition-all" on:click={() => selectedFiles = []} >Cancelar</Button>
             <Button class="!px-16">Enviar</Button>
         </div>
     </section>

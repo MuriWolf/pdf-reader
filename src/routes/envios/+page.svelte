@@ -58,7 +58,7 @@
                     {/if}
                 </div>
             </div>
-            <MinMaxRange title={"Valor da multa"} />
+            <MinMaxRange step={10} title={"Valor da multa"} />
         </form>
     </section>
 

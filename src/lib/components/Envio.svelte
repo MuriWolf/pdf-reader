@@ -26,7 +26,7 @@
         <p class="text-c-body-text text-lg"><strong class="font-semibold">Data de envio: </strong> <time datetime="12/02/2024">12/02/2024</time></p>
         <AlertDialog.Root>
             <AlertDialog.Trigger asChild let:builder>
-              <Button builders={[builder]} variant="outline" class="bg-c-primary text-c-body-text hover:text-c-body-text hover:bg-c-primary border-none font-semibold rounded-[5px] hover:bg-c-primary/80 w-full transition-all ease-in shadow-sm hover:shadow-transparent">Ver mais</Button>
+              <Button builders={[builder]} variant="outline" class="bg-c-primary text-c-body-text hover:text-c-body-text hover:bg-c-primary border-none font-semibold rounded-[5px] hover:bg-c-primary/80 w-full transition-all ease-in shadow-sm hover:shadow-transparent duration-75 active:scale-95">Ver mais</Button>
             </AlertDialog.Trigger>
             <AlertDialog.Content class="p-0 rounded-2xl border-none overflow-auto">
               <AlertDialog.Header class="bg-c-primary p-4 rounded-2xl">
@@ -49,7 +49,7 @@
                 </ul>
               </div>
               <AlertDialog.Footer>
-                <AlertDialog.Action class="btn-4 m-4 rounded-[5px] font-medium bg-c-primary hover:bg-c-primary/80 w-full transition-all ease-in shadow-sm hover:shadow-transparent">Voltar</AlertDialog.Action>
+                <AlertDialog.Action class="btn-4 m-4 rounded-[5px] font-medium bg-c-primary hover:bg-c-primary/80 w-full transition-all ease-in shadow-sm hover:shadow-transparent duration-75 active:scale-95">Voltar</AlertDialog.Action>
               </AlertDialog.Footer>
             </AlertDialog.Content>
           </AlertDialog.Root>
