@@ -2,23 +2,34 @@
 	import PdfInput from '$lib/components/inputs/PdfInput.svelte';
     import Button from "$lib/components/Button.svelte";
     import { scale, slide } from "svelte/transition"
-    import { base64 } from "@sveu/browser"
+    // import { base64 } from "@sveu/browser"
+    import pdfjs from "pdfjs-dist"
     let selectedFiles: Array<File> = [];
-    let encodedPDF: any;
+
     $: if (selectedFiles.length > 0) {
-        encodedPDF = base64(selectedFiles[0])
-        console.log($encodedPDF);    
-        
+        getPDFText(selectedFiles[0]);
     }
 
-    // $: encodedPDF = base64(selectedFiles[0]);
-
-    // $: if ($encodedPDF) {
-    //     $encodedPDF = $encodedPDF.replace("data:application/pdf;base64,", "")
-    //     console.log($encodedPDF);
+    async function getPDFText(file: File) {
+        const pdfBase64: string = await getBase64(file) as string;
+        const doc = await pdfjs.getDocument(pdfBase64).promise;
+        const page = await doc.getPage(1);
+        const textContent = await page.getTextContent();
+        console.log(textContent);
         
-    // }
-    
+    } 
+
+    async function getBase64(file: File) {
+        return new Promise(( resolve, reject ) => {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                let encoded = reader.result?.toString().replace("data:application/pdf;base64", "");
+                resolve(encoded);
+            };
+            reader.onerror = (error) => reject(error);
+        })
+    }
 
     function deleteFile(fileName: string) {
         selectedFiles = selectedFiles.filter((file) => file.name != fileName)
