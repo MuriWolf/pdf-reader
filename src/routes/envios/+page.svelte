@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { PdfType } from '$lib/types/PdfType.ts';
 	import { clickOutside } from '$lib/utilities/events/clickOutside';
 	import { slide, scale } from 'svelte/transition';
     import Label from "$lib/components/Label.svelte";
@@ -7,6 +8,8 @@
     import MinMaxRange from "$lib/components/ui/MinMaxRange.svelte";
     import Envio from "$lib/components/Envio.svelte";
     
+    export let data: any
+
     const end = today(getLocalTimeZone());
     const start = end.subtract({ months: 3 })
     let showRangeCalendar = false;
@@ -20,18 +23,12 @@
     };
 
     function handleClickOutside(event: any) {
-        // if (!(event.target == rangeInputContainerElement) && event.target == toggleRangeCalendarElement) {
-        //     return;
-        // }
         showRangeCalendar = !showRangeCalendar;
         // clickedOutside = true;
     }
 
     function toggleShowRangeCalendar(event: any) {
         showRangeCalendar = !showRangeCalendar;
-        // if (!clickedOutside) {
-        // }
-        // clickedOutside = false;
     }
 </script>
 
@@ -62,9 +59,13 @@
         </form>
     </section>
 
-    <section class="flex flex-col gap-4 max-w-3xl mx-auto mt-4 bg-c-secondary rounded-2xl p-4">
-        {#each Array(4) as _}
-            <Envio />
-        {/each}
+    <section class="flex flex-col gap-4 max-w-3xl mx-auto mt-4 bg-c-secondary rounded-2xl p-4 min-h-[300px]">
+        {#if data}
+            {#if data.posts.length > 0}
+                {#each data.posts as posts }
+                    <Envio multaDados={posts} />    
+                {/each}
+            {/if}
+        {/if}
     </section>
 </main>

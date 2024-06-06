@@ -3,20 +3,40 @@
     import Button from "$lib/components/Button.svelte";
     import { scale, slide } from "svelte/transition"
     // import { base64 } from "@sveu/browser"
-    import pdfjs from "pdfjs-dist"
+    import * as pdfjs from "pdfjs-dist";
+    import * as pdfWorker from 'pdfjs-dist/build/pdf.worker.mjs';
+    pdfjs.GlobalWorkerOptions.workerSrc = import.meta.url + 'pdfjs-dist/build/pdf.worker.mjs';
+
+    // import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
     let selectedFiles: Array<File> = [];
+    let selectedFIlesContent: Array<any> = [];
 
     $: if (selectedFiles.length > 0) {
-        getPDFText(selectedFiles[0]);
+        updatePDFs();
+    }
+    
+    async function updatePDFs() {
+        selectedFIlesContent = [];
+        selectedFIlesContent = selectedFiles.map(async (file) => {
+            const text = await getPDFItems(file);
+            return { name: file.name, lastModified: file.lastModified, text: text }
+        })
     }
 
-    async function getPDFText(file: File) {
+    async function getPDFItems(file: File) {
+        let text = "";
+        const content = await getPDFcontent(file);
+        content.items.map(item => {
+            text = text + "" + item.str;
+        })
+        return text;
+    }
+
+    async function getPDFcontent(file: File) {
         const pdfBase64: string = await getBase64(file) as string;
-        const doc = await pdfjs.getDocument(pdfBase64).promise;
+        const doc = await pdfjs.getDocument({data: atob(pdfBase64)}).promise;
         const page = await doc.getPage(1);
-        const textContent = await page.getTextContent();
-        console.log(textContent);
-        
+        return await page.getTextContent();
     } 
 
     async function getBase64(file: File) {
@@ -24,7 +44,7 @@
             let reader = new FileReader();
             reader.readAsDataURL(file);
             reader.onload = () => {
-                let encoded = reader.result?.toString().replace("data:application/pdf;base64", "");
+                let encoded = reader.result?.toString().replace("data:application/pdf;base64,", "");
                 resolve(encoded);
             };
             reader.onerror = (error) => reject(error);
