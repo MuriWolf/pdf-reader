@@ -7,8 +7,9 @@
     import { RangeCalendar } from "$lib/components/ui/range-calendar/index";
     import MinMaxRange from "$lib/components/ui/MinMaxRange.svelte";
     import Envio from "$lib/components/Envio.svelte";
+    import * as Select from "$lib/components/ui/select";
     
-    export let data: any
+    export let data: { posts: Array<PdfType> }
 
     const end = today(getLocalTimeZone());
     const start = end.subtract({ months: 3 })
@@ -37,7 +38,7 @@
     <section class="max-w-3xl mx-auto mt-4 bg-c-secondary rounded-2xl p-4">
         <h2 class="text-c-body-text font-bold text-2xl">Filtros</h2>
         <form action="" class="flex flex-col items-start gap-8 mt-4 w-full">
-            <div class="flex justify-between w-full gap-8">
+            <div class="grid grid-cols-2 w-full gap-8">
                 <Label titulo={"Título do aquivo"} />
                 <div class="w-full">
                     <span class="text-c-body-text mb-1 block">Data</span>
@@ -54,8 +55,28 @@
                         </div>
                     {/if}
                 </div>
+                <Select.Root >
+                    <Select.Trigger class="w-full" > 
+                        <Select.Value placeholder="Gravidade" />
+                    </Select.Trigger>
+                    <Select.Content>
+                        <Select.Item value="leve">Leve</Select.Item>
+                        <Select.Item value="media">Media</Select.Item>
+                        <Select.Item value="grave">Grave</Select.Item>
+                    </Select.Content>
+                </Select.Root>
+    
+                <Select.Root>
+                    <Select.Trigger class="w-full">
+                        <Select.Value placeholder="Infração" />
+                    </Select.Trigger>
+                    <Select.Content>
+                        <Select.Item value="leve">Velocidade</Select.Item>
+                    </Select.Content>
+                </Select.Root>
             </div>
-            <MinMaxRange step={10} title={"Valor da multa"} />
+
+            <!-- <MinMaxRange step={10} title={"Valor da multa"} /> -->
         </form>
     </section>
 

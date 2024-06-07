@@ -24,11 +24,11 @@
 
 <div class="w-full">
     <div class="flex justify-between mb-6">
-        <p class="text-darker-text text-c-body-text">{title}</p>
+        <p class="text-c-body-text">{title}</p>
         <div class="flex gap-x-2 bg-c-body-text border-[1px] rounded-md px-4 py-1 max-w-[33%] min-w-[150px]">
-            <input type="number" name="min-price" placeholder="min" bind:value={min} class="min-w-0 text-xs text-c-secondary-dark focus:outline-none" >
+            <input type="number" name="min-price" placeholder="min" bind:value={min} class="min-w-0 text-xs text-c-secondary-dark bg-c-body-text focus:outline-none" >
             <Separator class="" orientation="vertical" />
-            <input type="number" name="max-price" placeholder="max" bind:value={max} class="min-w-0 text-xs text-c-secondary-dark focus:outline-none">
+            <input type="number" name="max-price" placeholder="max" bind:value={max} class="min-w-0 text-xs text-c-secondary-dark bg-c-body-text focus:outline-none">
         </div>
     </div>
     <Slider value={[min, max]} max={maxSlider} step={step} onValueChange={handleSliderChange} />

@@ -4,55 +4,56 @@
     import { scale, slide } from "svelte/transition"
     // import { base64 } from "@sveu/browser"
     import * as pdfjs from "pdfjs-dist";
-    import * as pdfWorker from 'pdfjs-dist/build/pdf.worker.mjs';
+    import { getPDFItems } from '$lib/utilities/read-pdf/getPDFItems';
+    import { enhance } from '$app/forms';
+    import type { ActionData } from './$types';
     pdfjs.GlobalWorkerOptions.workerSrc = import.meta.url + 'pdfjs-dist/build/pdf.worker.mjs';
+    import { toast } from "svelte-sonner";
+    import { Toaster } from '$lib/components/ui/sonner';
 
-    // import pdfjsWorker from "pdfjs-dist/build/pdf.worker.entry";
+    export let form: ActionData;
+    
     let selectedFiles: Array<File> = [];
-    let selectedFIlesContent: Array<any> = [];
+    let selectedFilesContent: Array<any> | string = [];
+    let formElement: any;
 
-    $: if (selectedFiles.length > 0) {
+    $: if (selectedFiles) {
         updatePDFs();
+    }
+
+    $: if (form) {
+        if (form?.success) {
+            const toasterText = "Multas Enviadas com sucesso!"
+            const today = new Date()
+            today.getDate()
+            toast.success(toasterText, {
+                description: today.toString()
+            })
+            selectedFiles = [];
+            form = null;
+        }
     }
     
     async function updatePDFs() {
-        selectedFIlesContent = [];
-        selectedFIlesContent = selectedFiles.map(async (file) => {
+        selectedFilesContent = [];
+        for (const file of selectedFiles) {
             const text = await getPDFItems(file);
-            return { name: file.name, lastModified: file.lastModified, text: text }
-        })
-    }
-
-    async function getPDFItems(file: File) {
-        let text = "";
-        const content = await getPDFcontent(file);
-        content.items.map(item => {
-            text = text + "" + item.str;
-        })
-        return text;
-    }
-
-    async function getPDFcontent(file: File) {
-        const pdfBase64: string = await getBase64(file) as string;
-        const doc = await pdfjs.getDocument({data: atob(pdfBase64)}).promise;
-        const page = await doc.getPage(1);
-        return await page.getTextContent();
-    } 
-
-    async function getBase64(file: File) {
-        return new Promise(( resolve, reject ) => {
-            let reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => {
-                let encoded = reader.result?.toString().replace("data:application/pdf;base64,", "");
-                resolve(encoded);
-            };
-            reader.onerror = (error) => reject(error);
-        })
+            const today = new Date()
+            const todayTime = today.getTime()
+            selectedFilesContent.push({ name: file.name, lastModified: todayTime, text: text })
+        }
+        selectedFilesContent = JSON.stringify(selectedFilesContent);
     }
 
     function deleteFile(fileName: string) {
         selectedFiles = selectedFiles.filter((file) => file.name != fileName)
+    }
+
+    function handleFormSubmit() {
+        if (selectedFiles.length > 0) {
+            formElement.requestSubmit();
+        }
+        
     }
 </script>
 <main class="mx-auto p-4">
@@ -78,12 +79,15 @@
                 {/each}
             {/if}
         </div>
-        <div class="flex gap-4 justify-end max-xs:flex-col-reverse">
-            <Button class="bg-transparent border-2 border-c-body-text hover:!bg-c-body-text hover:text-black transition-all" on:click={() => selectedFiles = []} >Cancelar</Button>
-            <Button class="!px-16">Enviar</Button>
-        </div>
+        <form method="POST" use:enhance bind:this={formElement} class="flex gap-4 justify-end max-xs:flex-col-reverse">
+            <Button class="bg-transparent border-2 border-c-body-text hover:!bg-c-body-text hover:text-black transition-all" on:click={() => selectedFiles = []}>Cancelar</Button>
+            <Button class="!px-16" on:click={handleFormSubmit}>Enviar</Button>
+            <input type="hidden" name="pdf-values" bind:value={selectedFilesContent}>
+        </form>
     </section>
 </main>
+
+<Toaster />
 
 <style>
     ::-webkit-scrollbar {
