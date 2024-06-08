@@ -1,7 +1,7 @@
-export async function load({fetch}) {
-    const apiUrl = "http://127.0.0.1:8000";
+import { VITE_API_URL } from '$env/static/private';
 
-    const responsePosts = await fetch(`${apiUrl}/fines`, {
+export async function load({ fetch }) {
+    const responsePosts = await fetch(`${VITE_API_URL}/fines`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json; charset=utf-8"

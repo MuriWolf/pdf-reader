@@ -2,6 +2,7 @@
     import * as AlertDialog from "$lib/components/ui/alert-dialog/index";
     import Button from "$lib/components/ui/button/button.svelte";
     import type { PdfType } from "$lib/types/PdfType";
+    import { capitalizeFirstLetter } from "$lib/utilities/capitalizeFirstLetter";
 
     export let multaDados: PdfType;
 </script>
@@ -32,7 +33,9 @@
                   <h2 class="text-2xl font-semibold mb-2">Dados</h2>
                   <ul class="text-lg flex flex-col gap-2">
                     {#each Object.entries(multaDados) as [key, dado]}
-                      <li class="text-c-body-text/80"><strong class="text-c-body-text/95 font-semibold">{key}: </strong>{dado}</li>
+                      {#if key != "id_user"} <!-- data to now shown -->
+                        <li class="text-c-body-text/80"><strong class="text-c-body-text/95 font-semibold">{capitalizeFirstLetter(key.replace("_", " "))}: </strong>{dado}</li>
+                      {/if}
                     {/each}
                   </ul>
                 </div>

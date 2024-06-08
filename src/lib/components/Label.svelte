@@ -1,8 +1,8 @@
 <script lang="ts">
     import { createLabel, melt } from '@melt-ui/svelte'
 
-    export let titulo = "titulo"
-    export let type = "text"
+    export let titulo = "titulo";
+    export let value: string = "";
     const {
         elements: { root }
     } = createLabel()
@@ -17,10 +17,15 @@
     >
       <span class="text-c-body-text">{titulo}</span>
     </label>
-    <input
-      type={type}
-      id="email"
-      class="h-10 w-full rounded-[5px] bg-c-body-text px-3 py-2 focus:outline-none text-c-secondary-dark ring-c-body-text focus:ring-2 transition-all"
-      placeholder="Informe o título do arquivo"
-    />
+    <slot>
+      <input
+        type="text"
+        class="h-10 w-full rounded-[5px] bg-c-body-text px-3 py-2 focus:outline-none text-c-secondary-dark ring-c-primary focus:ring-2 transition-all shadow-inner-sm"
+        placeholder="Informe o título do arquivo"
+        bind:value={value}
+      />
+    </slot>
   </div>
+
+
+  

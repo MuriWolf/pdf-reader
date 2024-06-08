@@ -1,13 +1,12 @@
 import { fail } from '@sveltejs/kit';
-
-const apiUrl = "http://127.0.0.1:8000";
+import { VITE_API_URL } from '$env/static/private';
 
 export const actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
         const posts = formData.get("pdf-values")
 
-        const res = await fetch(`${apiUrl}/fines`, {
+        const res = await fetch(`${VITE_API_URL}/fines`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

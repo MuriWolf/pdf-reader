@@ -1,8 +1,9 @@
+import { VITE_API_URL } from '$env/static/private';
+
 export async function load({ fetch }) {
-    const apiUrl = "http://127.0.0.1:8000";
     const userID = 1;
     
-    const responseUserData = await fetch(`${apiUrl}/users/${userID}`, {
+    const responseUserData = await fetch(`${VITE_API_URL}/users/${userID}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json; charset=utf-8"
@@ -10,7 +11,7 @@ export async function load({ fetch }) {
     });
     const userData = await responseUserData.json();
 
-    const responseUserPosts = await fetch(`${apiUrl}/fines?user_id=${userID}`, {
+    const responseUserPosts = await fetch(`${VITE_API_URL}/fines?user_id=${userID}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json; charset=utf-8"

@@ -80,7 +80,7 @@
             {/if}
         </div>
         <form method="POST" use:enhance bind:this={formElement} class="flex gap-4 justify-end max-xs:flex-col-reverse">
-            <Button class="bg-transparent border-2 border-c-body-text hover:!bg-c-body-text hover:text-black transition-all" on:click={() => selectedFiles = []}>Cancelar</Button>
+            <Button class="text-c-body-text bg-red-400 hover:text-c-body-text hover:bg-red-400/90 transition-all" on:click={() => selectedFiles = []}>Cancelar</Button>
             <Button class="!px-16" on:click={handleFormSubmit}>Enviar</Button>
             <input type="hidden" name="pdf-values" bind:value={selectedFilesContent}>
         </form>
