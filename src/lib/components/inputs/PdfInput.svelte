@@ -60,7 +60,7 @@
         bind:files={inputFiles}
         bind:this={inputEl}
     />
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" width="31" height="32" viewBox="0 0 24 25" fill="none">
         <path d="M11 16.375V8.225L8.4 10.825L7 9.375L12 4.375L17 9.375L15.6 10.825L13 8.225V16.375H11ZM6 20.375C5.45 20.375 4.979 20.179 4.587 19.787C4.195 19.395 3.99934 18.9243 4 18.375V15.375H6V18.375H18V15.375H20V18.375C20 18.925 19.804 19.396 19.412 19.788C19.02 20.18 18.5493 20.3757 18 20.375H6Z" fill="black"/>
     </svg>
 </label>

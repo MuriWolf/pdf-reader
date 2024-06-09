@@ -9,7 +9,7 @@ export interface PdfType {
     placa_veiculo: string;
     infracao: string;
     gravidade: string;
-    data_infracao: number;
+    data_infracao: string;
     hora_infracao: string;
     endereco_infracao: string
 }

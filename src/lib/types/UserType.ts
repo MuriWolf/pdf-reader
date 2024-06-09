@@ -1,5 +1,6 @@
 export interface UserType {
+    id: number
     name: string
     email: string
-    quantidade_posts: number
+    quantidade_posts?: number
 }

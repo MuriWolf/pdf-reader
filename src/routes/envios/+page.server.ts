@@ -9,5 +9,13 @@ export async function load({ fetch }) {
     });
     const posts = await responsePosts.json();
 
-    return { posts: posts };
+    const responseUsers = await fetch(`${VITE_API_URL}/users`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json; charset=utf-8"
+        }
+    });
+    const users = await responseUsers.json();
+
+    return { posts: posts, users: users };
 }

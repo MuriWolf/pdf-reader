@@ -19,7 +19,7 @@
                 <div class="flex flex-col gap-2">
                     <h2><strong class="font-semibold">Nome: </strong>{data.userData.name}</h2>
                     <h2><strong class="font-semibold">Email/ID: </strong>{data.userData.email}</h2>
-                    <h2><strong class="font-semibold">Total de Envios: </strong>{data.userData.quantidade_posts}</h2>
+                    <h2><strong class="font-semibold">Total de Envios: </strong>{data.userPosts.length}</h2>
                 </div>
             {:else} 
                 <p class="text-c-body-text">loadind data ...</p>
@@ -32,7 +32,7 @@
                 {#if data}
                     {#if data.userPosts.length > 0}
                         {#each data.userPosts as userPost }
-                            <Envio multaDados={userPost} />    
+                            <Envio multaDados={userPost} userDados={data.userData} />    
                         {/each}
                     {/if}
                 {/if}

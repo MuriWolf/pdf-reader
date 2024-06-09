@@ -1,41 +1,54 @@
 <script lang="ts">
+	import type { UserType } from '$lib/types/UserType.ts';
     import { onMount } from 'svelte'
 	import Button from '$lib/components/Button.svelte';
 	import type { PdfType } from '$lib/types/PdfType.ts';
 	import { clickOutside } from '$lib/utilities/events/clickOutside';
 	import { slide, scale } from 'svelte/transition';
     import Label from "$lib/components/Label.svelte";
-    import { getLocalTimeZone, today } from "@internationalized/date";
+    import { getLocalTimeZone, today, type DateValue } from "@internationalized/date";
     import { RangeCalendar } from "$lib/components/ui/range-calendar/index";
     import MinMaxRange from "$lib/components/ui/MinMaxRange.svelte";
     import Envio from "$lib/components/Envio.svelte";
     import * as Select from "$lib/components/ui/select";
+
+    interface filtersType {
+        titulo: string,
+        gravidade_infracao: { value: string | number | undefined },
+        tipo_infracao: { value: string | number | undefined },
+        date_infracao: {
+            start: DateValue | undefined,
+            end: DateValue | undefined
+        }
+    }
     
-    export let data: { posts: Array<PdfType> }
+    export let data: { posts: Array<PdfType>, users: Array<UserType> }
+    const end = today(getLocalTimeZone());
+    const start = end.subtract({ months: 3 })
     let filteredPdfs: Array<PdfType>;  
-        
+    let showRangeCalendar = false;
+    let toggleRangeCalendarElement: HTMLElement;
+    let rangeInputContainerElement: HTMLElement;
+    let filters: filtersType = {
+        titulo: "",
+        gravidade_infracao: { value: undefined },
+        tipo_infracao: { value: undefined },
+        date_infracao: {
+            start: undefined,
+            end: undefined
+        }
+    }
+
     onMount(() => {
         if (data) {
             filteredPdfs = data.posts;
         }
     })
 
-    const end = today(getLocalTimeZone());
-    const start = end.subtract({ months: 3 })
-    let showRangeCalendar = false;
-    let clickedOutside = false; // não consegui arrumar um jeito mais inteligente
-    let toggleRangeCalendarElement: HTMLElement;
-    let rangeInputContainerElement: HTMLElement;
-    let filters = {
-        titulo: "",
-        gravidade_infracao: { value: undefined },
-        tipo_infracao: { value: undefined },
-        date_infracao: {
-            start: start,
-            end: end
-        }
+    function findPDFAuthor(id: number) {
+        return data.users.find((user) => user.id == id);
     }
-
+        
     function handleClickOutside(event: any) {
         showRangeCalendar = !showRangeCalendar;
         // clickedOutside = true;
@@ -51,37 +64,37 @@
             gravidade_infracao: { value: undefined },
             tipo_infracao: { value: undefined },
             date_infracao: {
-                start: start,
-                end: end
+                start: undefined,
+                end: undefined
             }
         }
+        filterPdfs();
     }
 
     function filterPdfs() {
         filters = filters;
         filteredPdfs = data.posts.filter((post) => {
-            if (!(post.gravidade == filters.gravidade_infracao.value || filters.gravidade_infracao.value == undefined)) return undefined;
-            if (!(post.infracao == filters.tipo_infracao.value || filters.tipo_infracao.value == undefined)) return undefined;
-            if (!(post.titulo_pdf.includes(filters.titulo) || filters.titulo == "")) return undefined;
+            if (!(post.gravidade.toLowerCase() == filters.gravidade_infracao.value || filters.gravidade_infracao.value == undefined)) return undefined;
+            if (!(post.infracao.toLowerCase() == filters.tipo_infracao.value || filters.tipo_infracao.value == undefined)) return undefined;
+            if (!(post.titulo_pdf.toLowerCase().includes(filters.titulo.toLowerCase()) || filters.titulo == "")) return undefined;
 
-            const filtersDateStart = new Date(`${filters.date_infracao.start.month}/${filters.date_infracao.start.day}/${filters.date_infracao.start.year}`);
-            const filtersDateEnd = new Date(`${filters.date_infracao.end.month}/${filters.date_infracao.end.day}/${filters.date_infracao.end.year}`);
-            const postDate = new Date(post.data_infracao);
-            postDate.setHours(0, 0, 0);            
-
-            if (!
-                (
-                    (postDate.getTime() == filtersDateStart.getTime() || postDate.getTime() > filtersDateStart.getTime())
-                        &&
-                    (postDate.getTime() == filtersDateEnd.getTime() || postDate.getTime() < filtersDateEnd.getTime())
-                )
-            ) return undefined;
-
+            if (filters.date_infracao.start && filters.date_infracao.end) {
+                const filtersDateStart = new Date(`${filters.date_infracao.start.month}/${filters.date_infracao.start.day}/${filters.date_infracao.start.year}`);
+                const filtersDateEnd = new Date(`${filters.date_infracao.end.month}/${filters.date_infracao.end.day}/${filters.date_infracao.end.year}`);
+                const postDate = new Date(post.data_infracao);
+                postDate.setHours(0, 0, 0);            
+    
+                if (!
+                    (
+                        (postDate.getTime() == filtersDateStart.getTime() || postDate.getTime() > filtersDateStart.getTime())
+                            &&
+                        (postDate.getTime() == filtersDateEnd.getTime() || postDate.getTime() < filtersDateEnd.getTime())
+                    )
+                ) return undefined;
+            }
             return post;
-
         })
     }
-
 </script>
 
 <main class="mx-auto p-4">
@@ -138,7 +151,7 @@
                             <Select.Value placeholder="Selecione" />
                         </Select.Trigger>
                         <Select.Content>
-                            <Select.Item value="velocidade">Velocidade</Select.Item>
+                            <Select.Item value="excesso de velocidade">Excesso de velocidade</Select.Item>
                         </Select.Content>
                     </Select.Root>
                 </Label>
@@ -148,18 +161,22 @@
                 <Button class="text-c-body-text bg-red-400 hover:text-c-body-text hover:bg-red-400/90 transition-all !py-2" on:click={clearFilters}>Limpar filtros</Button>
                 <Button class="bg-transparent border-2 hover:bg-white/40 !py-2" on:click={filterPdfs}>Filtrar</Button>
             </div>
-
-            <!-- <MinMaxRange step={10} title={"Valor da multa"} /> -->
         </form>
     </section>
 
     <section class="flex flex-col gap-4 max-w-3xl mx-auto mt-4 bg-c-secondary rounded-2xl p-4 min-h-[300px]">
-        {#if data && filteredPdfs}
-            {#if filteredPdfs.length > 0}
-                {#each filteredPdfs as posts }
-                    <Envio multaDados={posts} />    
-                {/each}
+        {#if data}
+            {#if filteredPdfs}
+                {#if filteredPdfs.length > 0}
+                    {#each filteredPdfs as post}
+                        <Envio multaDados={post} userDados={findPDFAuthor(post.id_user)} />    
+                    {/each}
+                {:else}
+                    <p class="text-lg text-c-body-text text-center">Nenhuma multa encontrada. Tente outros filtros!</p>
+                {/if}
             {/if}
+        {:else}
+            <p class="text-lg text-c-body-text text-center">Nenhuma multa foi encontrada :(</p>
         {/if}
     </section>
 </main>

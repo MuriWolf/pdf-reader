@@ -24,11 +24,11 @@ const config = {
         // "2xl": "1400px"
       },
 			colors: {
-        "c-primary": "#6153cc",
+        "c-primary": "#0284c7", // #6153cc <- COR ORIGINAL (ROXO ~escuro)
         "c-secondary": "#1e293b",
         "c-secondary-dark": "#0f172a",
         "c-secondary-light": "#334155",
-        "c-secondary-lighter": "#cbd5e1",
+        "c-secondary-lighter": "#e2e8f0",
         "c-body-text": "#f8fafc",
 				border: "hsl(var(--border) / <alpha-value>)",
 				input: "hsl(var(--input) / <alpha-value>)",
