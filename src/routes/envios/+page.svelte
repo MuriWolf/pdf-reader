@@ -14,7 +14,7 @@
 
     interface filtersType {
         titulo: string,
-        gravidade_infracao: { value: string | number | undefined },
+        natureza_infracao: { value: string | number | undefined },
         tipo_infracao: { value: string | number | undefined },
         date_infracao: {
             start: DateValue | undefined,
@@ -31,7 +31,7 @@
     let rangeInputContainerElement: HTMLElement;
     let filters: filtersType = {
         titulo: "",
-        gravidade_infracao: { value: undefined },
+        natureza_infracao: { value: undefined },
         tipo_infracao: { value: undefined },
         date_infracao: {
             start: undefined,
@@ -46,7 +46,9 @@
     })
 
     function findPDFAuthor(id: number) {
-        return data.users.find((user) => user.id == id);
+        if (data.users.length > 0) {
+            return data.users.find((user) => user.id_user == id);
+        }
     }
         
     function handleClickOutside(event: any) {
@@ -61,7 +63,7 @@
     function clearFilters() {
         filters = {
             titulo: "",
-            gravidade_infracao: { value: undefined },
+            natureza_infracao: { value: undefined },
             tipo_infracao: { value: undefined },
             date_infracao: {
                 start: undefined,
@@ -73,27 +75,29 @@
 
     function filterPdfs() {
         filters = filters;
-        filteredPdfs = data.posts.filter((post) => {
-            if (!(post.gravidade.toLowerCase() == filters.gravidade_infracao.value || filters.gravidade_infracao.value == undefined)) return undefined;
-            if (!(post.infracao.toLowerCase() == filters.tipo_infracao.value || filters.tipo_infracao.value == undefined)) return undefined;
-            if (!(post.titulo_pdf.toLowerCase().includes(filters.titulo.toLowerCase()) || filters.titulo == "")) return undefined;
-
-            if (filters.date_infracao.start && filters.date_infracao.end) {
-                const filtersDateStart = new Date(`${filters.date_infracao.start.month}/${filters.date_infracao.start.day}/${filters.date_infracao.start.year}`);
-                const filtersDateEnd = new Date(`${filters.date_infracao.end.month}/${filters.date_infracao.end.day}/${filters.date_infracao.end.year}`);
-                const postDate = new Date(post.data_infracao);
-                postDate.setHours(0, 0, 0);            
+        if (data.posts.length > 0) {
+            filteredPdfs = data.posts.filter((post) => {
+                if (!(post.natureza.toLowerCase() == filters.natureza_infracao.value || filters.natureza_infracao.value == undefined)) return undefined;
+                if (!(post.infracao.toUpperCase() == filters.tipo_infracao.value || filters.tipo_infracao.value == undefined)) return undefined;
+                if (!(post.placa_veiculo.toLowerCase().includes(filters.titulo.toLowerCase()) || filters.titulo == "")) return undefined;
     
-                if (!
-                    (
-                        (postDate.getTime() == filtersDateStart.getTime() || postDate.getTime() > filtersDateStart.getTime())
-                            &&
-                        (postDate.getTime() == filtersDateEnd.getTime() || postDate.getTime() < filtersDateEnd.getTime())
-                    )
-                ) return undefined;
-            }
-            return post;
-        })
+                if (filters.date_infracao.start && filters.date_infracao.end) {
+                    const filtersDateStart = new Date(`${filters.date_infracao.start.month}/${filters.date_infracao.start.day}/${filters.date_infracao.start.year}`);
+                    const filtersDateEnd = new Date(`${filters.date_infracao.end.month}/${filters.date_infracao.end.day}/${filters.date_infracao.end.year}`);
+                    const postDate = new Date(post.data_infracao);
+                    postDate.setHours(0, 0, 0);            
+        
+                    if (!
+                        (
+                            (postDate.getTime() == filtersDateStart.getTime() || postDate.getTime() > filtersDateStart.getTime())
+                                &&
+                            (postDate.getTime() == filtersDateEnd.getTime() || postDate.getTime() < filtersDateEnd.getTime())
+                        )
+                    ) return undefined;
+                }
+                return post;
+            })
+        }
     }
 </script>
 
@@ -103,7 +107,7 @@
         <h2 class="text-c-body-text font-bold text-2xl">Filtros</h2>
         <form action="" class="flex flex-col items-start gap-8 mt-4 w-full">
             <div class="grid sm:grid-cols-2 w-full gap-8">
-                <Label titulo={"Título do aquivo"} bind:value={filters.titulo} />
+                <Label titulo={"Título do aquivo"} bind:value={filters.titulo} placeholder={"Informe a placa do carro"} />
                 <div class="w-full">
                     <span class="text-c-body-text mb-1 block">Data da infração</span>
                     <button class="bg-c-body-text h-10 w-full rounded-[5px] px-3 py-2" on:click={toggleShowRangeCalendar} bind:this={toggleRangeCalendarElement}>
@@ -119,13 +123,14 @@
                         </div>
                     {/if}
                 </div>
-                <Label titulo={"Gravidade da infração"}>
+                <Label titulo={"natureza da infração"}>
                     <Select.Root 
+                        preventScroll={false}
                         onSelectedChange={(v) => {
-                            v && (filters.gravidade_infracao = v);
+                            v && (filters.natureza_infracao = v);
                             filters = filters;
                         }}
-                        selected={filters.gravidade_infracao}
+                        selected={filters.natureza_infracao}
                         
                       >
                         <Select.Trigger class="w-full !ring-c-primary !ring-offset-0 rounded-[5px] bg-c-body-text" > 
@@ -141,6 +146,7 @@
                 
                 <Label titulo={"Tipo de infração"}> 
                     <Select.Root
+                        preventScroll={false}
                         onSelectedChange={(v) => {
                             v && (filters.tipo_infracao = v);
                             filters = filters;
@@ -151,7 +157,7 @@
                             <Select.Value placeholder="Selecione" />
                         </Select.Trigger>
                         <Select.Content>
-                            <Select.Item value="excesso de velocidade">Excesso de velocidade</Select.Item>
+                            <Select.Item value="TRANSITAR EM VELOCIDADE SUPERIOR A MAXIMA PERMITIDA EM ATE 20%">Excesso de velocidade</Select.Item>
                         </Select.Content>
                     </Select.Root>
                 </Label>
@@ -169,7 +175,7 @@
             {#if filteredPdfs}
                 {#if filteredPdfs.length > 0}
                     {#each filteredPdfs as post}
-                        <Envio multaDados={post} userDados={findPDFAuthor(post.id_user)} />    
+                        <Envio multaDados={post} userDados={findPDFAuthor(post.user_id)} />    
                     {/each}
                 {:else}
                     <p class="text-lg text-c-body-text text-center">Nenhuma multa encontrada. Tente outros filtros!</p>

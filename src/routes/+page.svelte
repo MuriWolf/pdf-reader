@@ -40,9 +40,10 @@
             const text = await getPDFItems(file);
             const today = new Date()
             const todayTime = today.getTime()
-            selectedFilesContent.push({ name: file.name, lastModified: todayTime, text: text })
+            selectedFilesContent.push({ userId: 21, dataEnvio: todayTime, text: text })
         }
         selectedFilesContent = JSON.stringify(selectedFilesContent);
+        // console.log(selectedFilesContent);
         
     }
 
@@ -54,7 +55,6 @@
         if (selectedFiles.length > 0) {
             formElement.requestSubmit();
         }
-        
     }
 </script>
 <main class="mx-auto p-4">

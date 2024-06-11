@@ -2,7 +2,8 @@
     import { createLabel, melt } from '@melt-ui/svelte'
 
     export let titulo = "titulo";
-    export let value: string = "";
+    export let value = "";
+    export let placeholder = "";
     const {
         elements: { root }
     } = createLabel()
@@ -21,7 +22,7 @@
       <input
         type="text"
         class="h-10 w-full rounded-[5px] bg-c-body-text px-3 py-2 focus:outline-none text-c-secondary-dark ring-c-primary focus:ring-2 transition-all shadow-inner-sm"
-        placeholder="Informe o título do arquivo"
+        placeholder={placeholder}
         bind:value={value}
       />
     </slot>

@@ -8,7 +8,7 @@
     import type { UserType } from '$lib/types/UserType';
 
     export let multaDados: PdfType;
-    export let userDados: UserType | undefined;
+    export let userDados: UserType | undefined = undefined;
 
     let multaEnvioDateFormated: string;
     onMount(() => {
@@ -28,24 +28,24 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="42" height="42" fill="currentColor" class="w-[75%]"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM256 416c35.3 0 64-28.7 64-64c0-17.4-6.9-33.1-18.1-44.6L366 161.7c5.3-12.1-.2-26.3-12.3-31.6s-26.3 .2-31.6 12.3L257.9 288c-.6 0-1.3 0-1.9 0c-35.3 0-64 28.7-64 64s28.7 64 64 64zM176 144a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zM96 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm352-32a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/></svg>
       </div>
       <div>
-        <h2 class="text-2xl text-c-body-text font-semibold mb-2">{multaDados.titulo_pdf}</h2>
+        <h2 class="text-2xl text-c-body-text font-semibold mb-2">{multaDados.placa_veiculo}</h2>
         {#if userDados}
-        <p class="text-c-body-text"><strong class="font-semibold">Enviado por: </strong>{userDados.name}</p>
+          <p class="text-c-body-text"><strong class="font-semibold">Enviado por: </strong><a class="hover:text-c-primary hover:brightness-150 hover:underline transition-all duration-100" href={`/perfil/${userDados.username}`}>{userDados.nome_user}</a></p>
         {/if}
         <p class="text-c-body-text"><strong class="font-semibold">Enviado em: </strong> <time datetime={multaEnvioDateFormated}>{multaEnvioDateFormated}</time></p>
       </div>
       <div class="flex flex-col justify-end items-end gap-4 ml-auto w-1/4 min-w-[150px]">
-          <AlertDialog.Root>
+          <AlertDialog.Root preventScroll={false} closeOnOutsideClick={true} >
               <AlertDialog.Trigger asChild let:builder>
                 <Button builders={[builder]} variant="outline" class="bg-c-primary text-c-body-text hover:text-c-body-text hover:bg-c-primary border-none font-semibold rounded-[5px] hover:bg-c-primary/80 w-full transition-all ease-in shadow-sm hover:shadow-transparent duration-75 active:scale-95">Ver mais</Button>
               </AlertDialog.Trigger>
-              <AlertDialog.Content class="p-0 min-[670px]:rounded-2xl rounded-none border-none !overflow-auto">
-                <AlertDialog.Header class="bg-c-primary p-4 min-[670px]:rounded-2xl">
-                  <AlertDialog.Title class="text-c-body-text text-3xl font-bold">{multaDados.titulo_pdf}</AlertDialog.Title>
+              <AlertDialog.Content class="p-0 min-[670px]:rounded-2xl rounded-none border-none !overflow-auto max-h-[90vh]">
+                <AlertDialog.Header class="bg-c-primary p-4 min-[670px]:rounded-t-2xl">
+                  <AlertDialog.Title class="text-c-body-text text-3xl font-bold">{multaDados.placa_veiculo}</AlertDialog.Title>
                   <AlertDialog.Description>
                     {#if userDados}
                       <h3 class="text-c-body-text text-lg">
-                        <strong>Enviador por: </strong>{userDados.name}
+                        <strong>Enviador por: </strong><a href={`/perfil/${userDados.username}`}>{userDados.nome_user}</a> 
                       </h3>
                     {/if}
                     <h3 class="text-c-body-text text-lg">

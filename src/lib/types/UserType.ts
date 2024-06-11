@@ -1,6 +1,8 @@
 export interface UserType {
-    id: number
-    name: string
-    email: string
-    quantidade_posts?: number
+    id_user: number;
+    email: string;
+    senha: string;
+    nome_user: string;
+    username: string;
+    foto?: string;
 }
