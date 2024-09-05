@@ -14,6 +14,9 @@ declare global {
 		interface HTMLAttributes<T> {
 			"on:click_outside"?: CompositionEventHandler<T>;
 		}
+		interface HTMLAttributes<T> {
+			"on:drag_drop"?: CompositionEventHandler<T>;
+		}
 	}
 
 }
