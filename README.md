@@ -1,7 +1,10 @@
 # Demonstração da aplicação
 [![video da aplicacao](https://img.youtube.com/vi/SntDclpf3NE/0.jpg)](https://www.youtube.com/watch?v=SntDclpf3NE)
-# create-svelte
-1. Clona o projeto pra sua máquina
+# Clonar aplicação
+1. Clone o projeto pra sua máquina
+```bash
+git clone https://github.com/MuriWolf/pdf-reader.git
+```
 2. vá para a pasta do projeto
 
 # Comandos de inicialização do projeto
@@ -9,17 +12,14 @@
 # Baixar dependencias
 npm install 
 
-# para entrar no VScode
+# Entrar no VScode
 code . 
 ```
 
 # No VScode
-Crie um arquivo .env.development
-dentro dele coloque o valor que vou mandar
-
+Crie um arquivo .env.development na root do projeto, apenas o autor deste repositório possui o valor.
 
 # rodar o site
-
 ```bash
 npm run dev 
 ```
