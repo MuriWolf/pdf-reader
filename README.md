@@ -19,7 +19,7 @@ npm install
 code . 
 ```
 
-# No VScode
+# No Editor de Código (ex: VScode)
 Crie um arquivo .env.development na root do projeto, apenas o autor deste repositório possui o valor.
 
 # rodar o site
