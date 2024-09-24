@@ -6,22 +6,12 @@
 	import { clickOutside } from '$lib/utilities/events/clickOutside';
 	import { slide, scale } from 'svelte/transition';
     import Label from "$lib/components/Label.svelte";
-    import { getLocalTimeZone, today, type DateValue } from "@internationalized/date";
+    import { getLocalTimeZone, today } from "@internationalized/date";
     import { RangeCalendar } from "$lib/components/ui/range-calendar/index";
-    import MinMaxRange from "$lib/components/ui/MinMaxRange.svelte";
     import Envio from "$lib/components/Envio.svelte";
     import * as Select from "$lib/components/ui/select";
+    import type { filtersType } from '$lib/types/FinesFilterType';
 
-    interface filtersType {
-        titulo: string,
-        natureza_infracao: { value: string | number | undefined },
-        tipo_infracao: { value: string | number | undefined },
-        date_infracao: {
-            start: DateValue | undefined,
-            end: DateValue | undefined
-        }
-    }
-    
     export let data: { posts: Array<PdfType>, users: Array<UserType> }
     const end = today(getLocalTimeZone());
     const start = end.subtract({ months: 3 })
@@ -131,7 +121,6 @@
                             filters = filters;
                         }}
                         selected={filters.natureza_infracao}
-                        
                       >
                         <Select.Trigger class="w-full !ring-c-primary !ring-offset-0 rounded-[5px] bg-c-body-text" > 
                             <Select.Value placeholder="Selecione" />

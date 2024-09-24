@@ -1,5 +1,10 @@
 import { fail } from '@sveltejs/kit';
 import { VITE_API_URL } from '$env/static/private';
+import type { PageServerLoad } from './$types.js';
+
+export const load: PageServerLoad = async ({ locals }) => {
+    console.log(locals);
+}
 
 export const actions = {
 	default: async ({ request }) => {

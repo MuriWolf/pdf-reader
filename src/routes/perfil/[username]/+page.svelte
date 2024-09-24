@@ -10,24 +10,33 @@
 
 <main class="mx-auto p-4">
     <h1 class="max-w-3xl mx-auto text-c-body-text font-bold text-5xl">Perfil</h1>
-    <section class="max-w-3xl mx-auto mt-4 bg-c-secondary rounded-2xl mb-8">
-        <div class="flex max-[440px]:flex-col gap-4 bg-c-primary rounded-t-2xl p-4 mb-4 shadow-sm text-c-body-text text-lg">
-            <div class=" min-[440px]:h-28 min-[440px]:w-28 overflow-hidden rounded-[5px] border-2 border-c-body-text">
-                <img src={profile} alt="" class="w-full h-full">
+    <section class="flex flex-col gap-12 max-w-3xl mx-auto mt-12 rounded-2xl mb-8">
+        <div class="flex max-[440px]:flex-col items-center gap-4 text-c-body-text text-lg">
+            <div class="min-[440px]:h-28 min-[440px]:w-28 overflow-hidden rounded-full ">
+                <img src={profile} alt="Perfil" class="w-full h-full">
             </div>
             {#if data}
                 <div class="flex flex-col gap-2">
-                    <h2><strong class="font-semibold">Nome: </strong>{data.userData.nome_user}</h2>
-                    <h2><strong class="font-semibold">Email/ID: </strong>{data.userData.email}</h2>
-                    <h2><strong class="font-semibold">Total de Envios: </strong>{data.userPosts.length}</h2>
+                    <h2 class="text-[28px] font-medium">Tereza Fabiana Carolina Baptista</h2>
+                    <h3 class="text-c-body-text/80 text-sm">Fulano_siva - USER</h3>
                 </div>
             {:else} 
                 <p class="text-c-body-text">loadind data ...</p>
             {/if}
         </div>
+        <div>
+            {#if data}
+            <div class="flex flex-col gap-2">
+                <h2 class="text-c-body-text"><strong class="font-semibold text-lg uppercase">Email/ID</strong> <br/>{data.userData.email}</h2>
+                <h2 class="text-c-body-text"><strong class="font-semibold text-lg uppercase">Total de Envios</strong> <br/>{data.userPosts.length}</h2>
+            </div>
+            {:else} 
+                <p class="text-c-body-text">loadind data ...</p>
+            {/if}
+        </div>
     
-        <div class="p-4">
-            <h2 class="text-c-body-text font-bold text-3xl mb-2">Envios</h2>
+        <div class="p-4 bg-c-secondary-light rounded-2xl">
+            <h2 class="text-c-body-text font-bold text-2xl mb-2">Envios</h2>
             <div class="flex flex-col gap-4">
                 {#if data}
                     {#if data.userPosts.length > 0}
@@ -35,6 +44,8 @@
                             <Envio multaDados={userPost} userDados={data.userData} />    
                         {/each}
                     {/if}
+                {:else}
+                    <p>Sem multas enviadas por aqui.</p>
                 {/if}
             </div>
         </div>

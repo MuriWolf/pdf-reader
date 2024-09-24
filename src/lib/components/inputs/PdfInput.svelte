@@ -16,54 +16,6 @@
 
     const toggleHoveringDragDropInput = (bool: boolean) => hoveringDragDropInput = bool; 
     
-    // function handleFilesInput(e?: DragEvent) {
-    //     if (e) {
-    //         inputFiles = e.dataTransfer?.files;
-    //     }
-        
-    //     if (inputFiles && inputFiles.length > 0) {
-    //         inputErrorMessage = undefined;
-    //         let fileSize: number;
-    //         for (let i = 0; i < inputFiles!.length; i++) {
-    //             const file = inputFiles![i];
-
-    //             if (file.type != "application/pdf") {
-    //                 inputErrorMessage = 'Formato não permitido. Use apenas PDFs';
-    //                 break;
-    //             }
-                
-    //             fileSize = parseFloat((file.size / 1024 / 1024).toFixed(4)); // MB
-    //             if (fileSize > 20) {
-    //                 inputFiles = undefined;
-    //                 inputErrorMessage = 'Arquivo muito grande. Max: 20 MB';
-    //             }
-                
-    //             for (let j = 0; j < selectedFiles.length; j++) {
-    //                 const selectedFile = selectedFiles[j];
-    //                 if (file.name == selectedFile.name) {
-
-    //                     inputFiles = undefined;
-    //                     inputErrorMessage = 'Arquivo já existe.';
-    //                     break;
-    //                 }
-    //             }
-
-    //             if (inputErrorMessage != undefined) {
-    //                 break;
-    //             }
-    //         }
-
-    //         if (inputErrorMessage == undefined) {
-    //             for (let i = 0; i < inputFiles!.length; i++)  {
-    //                 selectedFiles.push(inputFiles![i]);  
-    //             }
-    //         }
-    //             inputEl.value = '';
-    //             selectedFiles = selectedFiles; 
-    //             inputFiles = undefined;
-    //     }
-    // }
-
     function handleDragDrop(e: DragEvent) {
         toggleHoveringDragDropInput(false);
         const response = handleFilesInput(inputEl, inputFiles, selectedFiles, e);
@@ -77,7 +29,7 @@
 
 <label 
     for="profileImg"
-    class="w-full max-w-full flex justify-center items-center  mx-auto overflow-hidden h-[320px] bg-c-secondary-lighter rounded-[10px] cursor-pointer transition-all {inputErrorMessage != undefined ? 'border-red-400 bg-red-200' : 'border-gray-300 bg-borders'} {hoveringDragDropInput ? 'bg-slate-400 duration-[2000]' : ''}" use:dragDrop on:drag_drop={handleDragDrop} on:drop={handleDragDrop} on:dragover={() => toggleHoveringDragDropInput(true)} on:dragleave={() => toggleHoveringDragDropInput(false)}
+    class="w-full max-w-full flex justify-center items-center  mx-auto overflow-hidden h-[320px] bg-c-secondary-lighter rounded-[10px] cursor-pointer transition-all {inputErrorMessage != undefined ? 'border-red-400 bg-red-200' : 'border-gray-300 bg-borders'} {hoveringDragDropInput ? 'bg-slate-400 border-4 border-dashed' : ''}" use:dragDrop on:drag_drop={handleDragDrop} on:drop={handleDragDrop} on:dragover={() => toggleHoveringDragDropInput(true)} on:dragleave={() => toggleHoveringDragDropInput(false)}
 >
     <input
         type="file"

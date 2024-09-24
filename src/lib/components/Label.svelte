@@ -21,7 +21,7 @@
     <slot>
       <input
         type="text"
-        class="h-10 w-full rounded-[5px] bg-c-body-text px-3 py-2 focus:outline-none text-c-secondary-dark ring-c-primary focus:ring-2 transition-all shadow-inner-sm"
+        class="h-10 w-full rounded-[5px] bg-c-secondary-light px-3 py-2 focus:outline-none text-c-body-text ring-c-primary focus:ring-2 transition-all "
         placeholder={placeholder}
         bind:value={value}
       />
