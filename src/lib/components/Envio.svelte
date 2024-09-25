@@ -51,9 +51,6 @@
                         </h3>
                       {/if}
                     {/if}
-                    <p>
-                      asdas
-                    </p>
                       <h3 class="text-c-body-text text-lg">
                         <strong>Enviado em: </strong> <time datetime={multaEnvioDateFormated}>{multaEnvioDateFormated}</time>
                       </h3>

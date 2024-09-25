@@ -15,7 +15,7 @@
     <section class="flex flex-col gap-12 max-w-3xl mx-auto mt-12 rounded-2xl mb-8">
         <div class="flex max-[440px]:flex-col items-center gap-4 text-c-body-text text-lg">
             <div class="min-[440px]:h-28 min-[440px]:w-28 overflow-hidden rounded-full ">
-                <img src={profile} alt="Perfil" class="w-full h-full">
+                <img src="" alt="No image" class="flex items-center justify-center w-full h-full text-c-secondary-dark bg-c-secondary-lighter">
             </div>
             {#if data.userData}
                 <div class="flex flex-col gap-2">

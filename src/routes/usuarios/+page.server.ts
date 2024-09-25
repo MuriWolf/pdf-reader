@@ -17,7 +17,6 @@ export const load: PageServerLoad = async ({ locals }) => {
     }
 }
 
-
 export const actions = {
 	delete: async ({ request, cookies }) => {
 		const data = Object.fromEntries(await request.formData());
@@ -28,7 +27,5 @@ export const actions = {
         }
 
         deleteUser(Number(data.idUserToDelete), userAccessToken);
-
-        // console.log(idToDelete);
 	}
 };
