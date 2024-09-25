@@ -4,6 +4,7 @@
     export let titulo = "titulo";
     export let value = "";
     export let placeholder = "";
+    export let name = "";
     const {
         elements: { root }
     } = createLabel()
@@ -21,12 +22,13 @@
     <slot>
       <input
         type="text"
+        name={name}
         class="h-10 w-full rounded-[5px] bg-c-secondary-light px-3 py-2 focus:outline-none text-c-body-text ring-c-primary focus:ring-2 transition-all "
         placeholder={placeholder}
         bind:value={value}
       />
     </slot>
-  </div>
+</div>
 
 
   

@@ -1,7 +1,13 @@
 import { VITE_API_URL } from '$env/static/private';
 
-export async function load({ fetch, params }) {
+export async function load({ fetch, params, locals }) {
     const username = params.username; 
+
+    let currentUser = false;
+
+    if (locals?.user?.username === params.username) {
+        currentUser = true;
+    }
     
     const responseUserData = await fetch(`${VITE_API_URL}/users?username=${username}`, {
         method: "GET",
@@ -20,6 +26,6 @@ export async function load({ fetch, params }) {
     const userPosts = await responseUserPosts.json();
 
     return {
-        userData, userPosts
+        userData, userPosts, currentUser
     };
 }

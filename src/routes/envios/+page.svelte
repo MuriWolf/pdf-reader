@@ -37,7 +37,7 @@
 
     function findPDFAuthor(id: number) {
         if (data.users.length > 0) {
-            return data.users.find((user) => user.id_user == id);
+            return data.users.find((user) => user.id == id);
         }
     }
         
@@ -109,7 +109,7 @@
                     </button>
                     {#if showRangeCalendar}
                         <div class="absolute z-10" use:clickOutside on:click_outside={handleClickOutside} transition:scale={{ duration: 100 }} bind:this={rangeInputContainerElement}>
-                            <RangeCalendar maxValue={end} bind:value={filters.date_infracao} class="rounded-[5px] border bg-c-body-text  mt-4" />
+                            <RangeCalendar maxValue={end} bind:value={filters.date_infracao} class="rounded-[5px] border bg-c-body-text mt-4" />
                         </div>
                     {/if}
                 </div>

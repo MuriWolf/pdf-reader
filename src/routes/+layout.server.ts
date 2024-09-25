@@ -1,11 +1,9 @@
-import type { PageServerLoad } from "./$types";
+import type { PageServerLoad } from "./$types.js";
 
 export const ssr = false;
 
 export const load: PageServerLoad = async ({ locals }) => {
-    let isUserLogged: boolean;
-    isUserLogged = !locals.user ? false : true;
     return {
-        isUserLogged: isUserLogged
+        user: locals.user
     }
 }

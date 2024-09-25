@@ -9,6 +9,7 @@
 
     export let multaDados: PdfType;
     export let userDados: UserType | undefined = undefined;
+    export let enviadoPor: boolean = true;
 
     let multaEnvioDateFormated: string;
     onMount(() => {
@@ -44,13 +45,18 @@
                   <AlertDialog.Title class="text-c-body-text text-3xl font-bold">{multaDados.placa_veiculo}</AlertDialog.Title>
                   <AlertDialog.Description>
                     {#if userDados}
-                      <h3 class="text-c-body-text text-lg">
-                        <strong>Enviador por: </strong><a href={`/perfil/${userDados.username}`}>{userDados.nome_user}</a> 
-                      </h3>
+                      {#if enviadoPor}
+                        <h3 class="text-c-body-text text-lg">
+                          <strong>Enviador por: </strong><a href={`/perfil/${userDados.username}`}>{userDados.nome_user}</a> 
+                        </h3>
+                      {/if}
                     {/if}
-                    <h3 class="text-c-body-text text-lg">
-                      <strong>Enviado em: </strong> <time datetime={multaEnvioDateFormated}>{multaEnvioDateFormated}</time>
-                    </h3>
+                    <p>
+                      asdas
+                    </p>
+                      <h3 class="text-c-body-text text-lg">
+                        <strong>Enviado em: </strong> <time datetime={multaEnvioDateFormated}>{multaEnvioDateFormated}</time>
+                      </h3>
                   </AlertDialog.Description>
                 </AlertDialog.Header>
                 <div class="p-4 text-c-body-text/90 ">
