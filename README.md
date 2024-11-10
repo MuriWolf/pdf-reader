@@ -1,5 +1,5 @@
 # Início
-Este projeto é uma API de uma aplicação que visa, através de PDFs de multas de trânsito, extrair seus dados e armazená-los no site, onde é possível ter maior controle sobre eles. Este projeto é um trabalho de [Universidade](https://unimar.br/), que tem como foco a empresa [DSIN](https://www.dsin.com.br/), crida em Marília e que atua em mais de 100 munícipios. </br>
+Este projeto é uma aplicação que visa, através de PDFs de multas de trânsito, extrair seus dados e armazená-los no site, onde é possível ter maior controle sobre eles. Este projeto é um trabalho de [Universidade](https://unimar.br/), que tem como foco a empresa [DSIN](https://www.dsin.com.br/), crida em Marília e que atua em mais de 100 munícipios. </br>
 > Para ver o backend/API do projeto, [clique aqui](https://github.com/MuriWolf/pdf-reader-api).
 ## Demonstração da aplicação
 [![video da aplicacao](https://img.youtube.com/vi/SntDclpf3NE/0.jpg)](https://www.youtube.com/watch?v=SntDclpf3NE)
