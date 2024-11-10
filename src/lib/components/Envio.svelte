@@ -38,7 +38,7 @@
       <div class="flex flex-col justify-end items-end gap-4 ml-auto w-1/4 min-w-[150px]">
           <AlertDialog.Root preventScroll={false} closeOnOutsideClick={true} >
               <AlertDialog.Trigger asChild let:builder>
-                <Button builders={[builder]} variant="outline" class="bg-c-primary text-c-body-text hover:text-c-body-text hover:bg-c-primary border-none font-semibold rounded-[5px] hover:bg-c-primary/80 w-full transition-all ease-in shadow-sm hover:shadow-transparent duration-75 active:scale-95">Ver mais</Button>
+                <Button builders={[builder]} variant="outline" class="bg-c-primary text-c-body-text hover:text-c-body-text hover:bg-c-primary border-none font-semibold rounded-full hover:bg-c-primary/80 w-full transition-all ease-in shadow-sm hover:shadow-transparent duration-75 active:scale-95">Ver mais</Button>
               </AlertDialog.Trigger>
               <AlertDialog.Content class="p-0 min-[670px]:rounded-2xl rounded-none border-none !overflow-auto max-h-[90vh]">
                 <AlertDialog.Header class="bg-c-primary p-4 min-[670px]:rounded-t-2xl">
@@ -67,7 +67,7 @@
                   </ul>
                 </div>
                 <AlertDialog.Footer class="max-w-full">
-                  <AlertDialog.Action class="btn-4 m-4 rounded-[5px] font-medium bg-c-primary hover:bg-c-primary/80 max-w-full sm:w-full transition-all ease-in shadow-sm hover:shadow-transparent duration-75 active:scale-95">Voltar</AlertDialog.Action>
+                  <AlertDialog.Action class="btn-4 m-4 font-medium bg-c-primary hover:bg-c-primary/80 max-w-full rounded-full sm:w-full transition-all ease-in shadow-sm hover:shadow-transparent duration-75 active:scale-95">Voltar</AlertDialog.Action>
                 </AlertDialog.Footer>
               </AlertDialog.Content>
           </AlertDialog.Root>

@@ -3,11 +3,9 @@
   import Button from "$lib/components/Button.svelte";
   import Label from "$lib/components/Label.svelte";
   import * as Select from "$lib/components/ui/select";
-  import type { UserSignupType } from "$lib/types/UserSignupType"
   import ImageImportModal from "$lib/components/modals/ImageImportModal.svelte";
   import { ImageUp } from "lucide-svelte";
   import type { UserType } from "$lib/types/UserType";
-
   
   export let data: UserType;
 
@@ -100,18 +98,18 @@
     </Label>
     <Label titulo={"Role"}>
       <Select.Root 
-      preventScroll={false}
-      onSelectedChange={handleSelectedChange}
-      selected={showRoleOnSelect}
-    >
-      <Select.Trigger class="w-full !ring-c-primary !ring-offset-0 rounded-[5px] bg-c-body-text {form?.errors?.form?.role?.[0] ? 'border-2 border-red-400' : ''}" > 
-          <Select.Value placeholder="User" />
-      </Select.Trigger>
-      <Select.Content>
-        <Select.Item value="admin">Admin</Select.Item>
-        <Select.Item value="user">User</Select.Item>
-      </Select.Content>
-    </Select.Root>
+        preventScroll={false}
+        onSelectedChange={handleSelectedChange}
+        selected={showRoleOnSelect}
+      >
+        <Select.Trigger class="w-full !ring-c-primary !ring-offset-0 rounded-[5px] bg-c-body-text {form?.errors?.form?.role?.[0] ? 'border-2 border-red-400' : ''}" > 
+            <Select.Value placeholder={data.role} />
+        </Select.Trigger>
+        <Select.Content>
+          <Select.Item value="admin">Admin</Select.Item>
+          <Select.Item value="user">User</Select.Item>
+        </Select.Content>
+      </Select.Root>
       <input type="hidden" name="role" bind:value={data.role}>
       {#if form}
         {#if form?.errors?.form?.role?.[0]}

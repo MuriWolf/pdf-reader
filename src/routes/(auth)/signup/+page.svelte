@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	  import { enhance } from '$app/forms';
     import Button from "$lib/components/Button.svelte";
     import Label from "$lib/components/Label.svelte";
     import * as Select from "$lib/components/ui/select";
     import type { UserSignupType } from "$lib/types/UserSignupType"
     import ImageImportModal from "$lib/components/modals/ImageImportModal.svelte";
     import { ImageUp } from "lucide-svelte";
+    import { Toaster } from '$lib/components/ui/sonner';
+    import { toast } from 'svelte-sonner';
 
     export let form;
 
@@ -18,6 +20,7 @@
       senha: "",
       username: "",
     };
+
     let showRoleOnSelect: { value: "user" | "admin" } = { value: userData.role };
 
     function handlePhotoProfileChange(e: any) {}
@@ -27,12 +30,20 @@
       userData = userData;
       showRoleOnSelect = v;
     }
+
+    function createSucessToast(userRole: 'admin' | 'user') {
+      toast(`Perfil de ${userRole} criado com sucesso.`);
+    }
+
+    function handleFormSubmit(userRole: 'admin' | 'user' ) {
+      createSucessToast(userRole);
+    }
 </script>
 
 <hgroup class="max-w-xl mx-auto p-8">
     <h1 class="text-c-body-text font-bold text-5xl">Adicionar perfil</h1>
   </hgroup>
-  <form method="POST" action="/signup" use:enhance class="flex flex-col gap-4 max-w-xl mx-auto mt-4 rounded-2xl p-8">
+  <form method="POST" action="/signup" use:enhance on:submit={() => handleFormSubmit(userData.role)} class="flex flex-col gap-4 max-w-xl mx-auto mt-4 rounded-2xl p-8">
     {#if form?.errors?.api?.[0]}
       <span class="text-red-400 mt-1">{form?.errors?.api?.[0]}</span>
     {/if}
@@ -121,6 +132,8 @@
     </Label>
     <Button type="submit" class="mt-16">Enviar</Button>
   </form>
+
+<Toaster />
 
 {#if showImageImportModal}
   <ImageImportModal 

@@ -25,12 +25,7 @@
 
     $: if (form) {
         if (form?.success) {
-            const toasterText = "Multas Enviadas com sucesso!"
-            const today = new Date()
-            today.getDate()
-            toast.success(toasterText, {
-                description: today.toString()
-            })
+            createSucessToast();
             selectedFiles = [];
             form = null;
         }
@@ -45,8 +40,6 @@
             selectedFilesContent.push({ userId: data?.id, dataEnvio: todayTime, text: text })
         }
         selectedFilesContent = JSON.stringify(selectedFilesContent);
-        // console.log(selectedFilesContent);
-        
     }
 
     function deleteFile(fileName: string) {
@@ -57,6 +50,15 @@
         if (selectedFiles.length > 0) {
             formElement.requestSubmit();
         }
+    }
+
+    function createSucessToast() {
+        const toasterText = "Multas Enviadas com sucesso!"
+        const today = new Date()
+        today.getDate()
+        toast.success(toasterText, {
+            description: today.toString()
+        })
     }
 </script>
 <main class="mx-auto p-4">
