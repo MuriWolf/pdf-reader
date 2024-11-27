@@ -11,8 +11,8 @@
 {data.currentUser}
 
 <main class="mx-auto p-4">
-    <h1 class="max-w-3xl mx-auto text-c-body-text font-bold text-5xl">Perfil</h1>
-    <section class="flex flex-col gap-12 max-w-3xl mx-auto mt-12 rounded-2xl mb-8">
+    <h1 class="max-w-4xl mx-auto text-c-body-text font-bold text-5xl">Perfil</h1>
+    <section class="flex flex-col gap-12 max-w-4xl mx-auto mt-12 rounded-2xl mb-8">
         <div class="flex max-[440px]:flex-col items-center gap-4 text-c-body-text text-lg">
             <div class="min-[440px]:h-28 min-[440px]:w-28 overflow-hidden rounded-full ">
                 <img src="" alt="No image" class="flex items-center justify-center w-full h-full text-c-secondary-dark bg-c-secondary-lighter">

@@ -92,8 +92,8 @@
 </script>
 
 <main class="mx-auto p-4">
-    <h1 class="max-w-3xl mx-auto text-c-body-text font-bold text-5xl ">Envios</h1>
-    <section class="max-w-3xl mx-auto mt-4 bg-c-secondary rounded-2xl p-4">
+    <h1 class="max-w-4xl mx-auto text-c-body-text font-bold text-5xl ">Envios</h1>
+    <section class="max-w-4xl mx-auto mt-4 bg-c-secondary rounded-2xl p-4">
         <h2 class="text-c-body-text font-bold text-2xl">Filtros</h2>
         <form action="" class="flex flex-col items-start gap-8 mt-4 w-full">
             <div class="grid sm:grid-cols-2 w-full gap-8">
@@ -159,7 +159,7 @@
         </form>
     </section>
 
-    <section class="flex flex-col gap-4 max-w-3xl mx-auto mt-4 bg-c-secondary rounded-2xl p-4 min-h-[300px]">
+    <section class="flex flex-col gap-4 max-w-4xl mx-auto mt-4 bg-c-secondary rounded-2xl p-4 min-h-[300px]">
         {#if data}
             {#if filteredPdfs}
                 {#if filteredPdfs.length > 0}
