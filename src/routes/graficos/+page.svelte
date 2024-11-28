@@ -1,107 +1,45 @@
 <script lang="ts">
     import type { AllChartsType } from "$lib/types/charts/AllChartsType";
     import { Line, Pie, Doughnut, Bar } from 'svelte-chartjs'
-    import { Chart as ChartJS, registerables} from 'chart.js'
-    import type {TooltipItem} from 'chart.js'
-    import { text } from "@sveltejs/kit";
-    import { Weight } from "lucide-svelte";
+    import { Chart as ChartJS, Legend, registerables} from 'chart.js'
+    import type {ChartOptions, ChartTypeRegistry, CoreChartOptions, TooltipItem} from 'chart.js'
+    import { createChartConfig } from "$lib/utilities/charts/createChartConfig";
     ChartJS.register(...registerables)
+    ChartJS.defaults.color = '#f8fafc';
+    ChartJS.defaults.borderColor = '#334155bb';
+    ChartJS.defaults.font.family = "sora";
+
     export let data: AllChartsType;
 
     if (data) {
         console.log(data);
     }
-
-
-    const config = {
-        maintainAspectRatio: false, // Permite ajustar a altura e largura do gráfico
-        responsive: true, // Torna o gráfico responsivo
-        plugins: {
-            tooltip: {
-                callbacks: {
-                    label: function (context:TooltipItem <'bar'>) {
-                        const datasetIndex = context.datasetIndex || '';
-                        const index = context.dataIndex;
-
-                        const label = context.dataset.label;
-
-                        const labelText = Array.isArray(label) ? label[index] : label; 
-
-                        // Se o label não existir ou estiver vazio, usamos um fallback
-                    const displayLabel = labelText ? labelText : 'Descrição Não Encontrada';
-
-                        const value = context.raw;
-                        return `${displayLabel}: ${value}`;
-                    }
-                },
-                padding: 20,
-                bodyFont: {
-                    size: 14,
-                    weight: 700
-                },
-                boxPadding: 10,
-                displayColors: false
-            },
-            title: {
-                display: true,
-                text: 'Titulo do Grafico',
-                font: {
-                    size: 24,
-                    Weight: 'bold',
-                    family: 'Arial',
-                },
-                padding: {
-                    top: 10,
-                    bottom: 10,
-                    left: 20,
-                    right: 20
-                }
-            }
-        },
-        layout: {
-            padding: {
-                top: 10,
-                bottom: 10,
-                left: 20,
-                right: 20
-            }
-        },
-        scales: {
-            x: {
-                beginAtZero: true
-            },
-            y: {
-                beginAtZero: true
-            }
-        }
-    };
-
-</script>
+ </script>
 
 <main class="grid-charts-container mx-auto max-w-4xl gap-4 mb-16">
     {#if data.enquadramento}
-        <div class="graph-one w-full p-4 rounded-lg bg-c-secondary">
-            <Bar data={data.enquadramento} width={300} height={300} options={config} />
+        <div class="graph-one w-full p-4 rounded-lg bg-c-secondary ">
+            <Bar data={data.enquadramento} width={300} height={350} options={createChartConfig("Enquadramentos", false)} />
         </div>
     {/if}
     {#if data.natureza}
         <div class="graph-two p-4 w-full rounded-lg bg-c-secondary">
-            <Doughnut data={data.natureza} width={300} height={300} options={{ maintainAspectRatio: false }} />
+            <Doughnut data={data.natureza} width={300} height={400} options={createChartConfig("Gráfico de Natureza das Infrações", true)} />
         </div>
     {/if}
     {#if data.marca_veiculo}
         <div class="graph-three w-full p-4 rounded-lg bg-c-secondary">
-            <Bar data={data.marca_veiculo} width={300} height={300} options={config} />
+            <Bar data={data.marca_veiculo} width={300} height={300} options={createChartConfig("Marcas de veículo", false)} />
         </div>
     {/if}
     {#if data.velocidade_regulamentada}
         <div class="graph-four p-4 w-full rounded-lg bg-c-secondary">
-            <Pie data={data.velocidade_regulamentada} width={300} height={300} options={{ maintainAspectRatio: false }} />
+            <Pie data={data.velocidade_regulamentada} width={300} height={350} options={createChartConfig("Gráfico de Velocidade Regulamentada", true)} />
         </div>
     {/if}
     
     <div class="graph-five p-4 w-full rounded-lg bg-c-secondary">
-        <Line data={data.data_infracao} width={300} height={300} options={{ maintainAspectRatio: false }} />
+        <Line data={data.data_infracao} width={300} height={300} options={createChartConfig("Gráfico de Data das Infrações (por ano)", false)} />
     </div>
 </main>
 
