@@ -29,7 +29,7 @@
 
 <label 
     for="profileImg"
-    class="w-full max-w-full flex justify-center items-center  mx-auto overflow-hidden h-[320px] bg-c-secondary-lighter rounded-[10px] cursor-pointer transition-all {inputErrorMessage != undefined ? 'border-red-400 bg-red-200' : 'border-gray-300 bg-borders'} {hoveringDragDropInput ? 'bg-slate-400 border-4 border-dashed' : ''}" use:dragDrop on:drag_drop={handleDragDrop} on:drop={handleDragDrop} on:dragover={() => toggleHoveringDragDropInput(true)} on:dragleave={() => toggleHoveringDragDropInput(false)}
+    class="w-full max-w-full flex justify-center items-center mx-auto overflow-hidden aspect-[2/1] bg-c-secondary-lighter rounded-[10px] cursor-pointer transition-all {inputErrorMessage != undefined ? 'border-red-400 bg-red-200' : 'border-gray-300 bg-borders'} {hoveringDragDropInput ? 'bg-slate-400 border-4 border-dashed' : ''}" use:dragDrop on:drag_drop={handleDragDrop} on:drop={handleDragDrop} on:dragover={() => toggleHoveringDragDropInput(true)} on:dragleave={() => toggleHoveringDragDropInput(false)}
 >
     <input
         type="file"

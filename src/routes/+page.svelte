@@ -66,6 +66,7 @@
     <section class="max-w-4xl mx-auto mt-4 bg-c-secondary rounded-2xl p-4">
         <!-- <input type="file" name="upload" accept="application/pdf,application/vnd.ms-excel" class=" /> -->
         <PdfInput bind:selectedFiles />
+        
         <div class="flex gap-4 mt-4 overflow-x-auto pb-4 mb-12"> 
             {#if selectedFiles}
                 {#each selectedFiles as file}
